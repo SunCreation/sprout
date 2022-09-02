@@ -43,3 +43,7 @@ def slice_sample(inputs, outputs, input_sc):
     input_ts = np.concatenate(input_ts, axis=0)
 
     return input_ts
+
+
+def remove_outlier(df: pd.DataFrame):
+    df['내부CO2'] = np.vectorize(lambda x: x*100 if x < 10 else x)(df['내부CO2'])

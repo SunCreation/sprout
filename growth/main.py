@@ -14,7 +14,8 @@ from utils import (
     incloud_null_col,
     predict_columns,
     preprocess_remove_str,
-    slice_sample
+    slice_sample,
+    remove_outlier
 )
 from src import (
     Sprout_Dense,
@@ -40,7 +41,7 @@ outputs = pd.read_csv(f'{data_path}/train_output.csv')
 inputs_ = inputs
 
 # print(inputs[incloud_null_col(inputs)[0]])
-
+remove_outlier(inputs)
 
 inputs = pd.concat([inputs,pd.get_dummies(inputs['시설ID']),pd.get_dummies(inputs['재배형태'])],axis=1)
 
@@ -92,7 +93,7 @@ train_x, val_x, train_y, val_y = train_test_split(input_ts, output_sc, test_size
 # 모델 정의
 def create_model():
     x = Input(shape=[7, 54])
-    l1 = LSTM(64)(x)
+    l1 = LSTM(256)(x)
     out = Dense(3, activation='tanh')(l1)
     return Model(inputs=x, outputs=out)
 
@@ -125,6 +126,8 @@ model.load_weights('baseline.h5')
 # 테스트셋 전처리 및 추론
 test_inputs = pd.read_csv(f'{data_path}/test_input.csv')
 output_sample = pd.read_csv(f'{data_path}/answer_sample.csv')
+
+remove_outlier(test_inputs)
 
 test_inputs = test_inputs[inputs_.columns]
 
