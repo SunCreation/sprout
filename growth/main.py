@@ -105,7 +105,7 @@ model.compile(loss='mse', optimizer=Adam(lr=0.001), metrics=['mse'])
 
 
 # 학습
-hist = model.fit(train_x, train_y, batch_size=128, epochs=200, validation_data=(val_x, val_y), callbacks=[checkpointer])
+hist = model.fit(train_x, train_y, batch_size=128, epochs=2, validation_data=(val_x, val_y), callbacks=[checkpointer])
 
 
 # loss 히스토리 확인

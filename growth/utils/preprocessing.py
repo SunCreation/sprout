@@ -47,3 +47,26 @@ def slice_sample(inputs, outputs, input_sc):
 
 def remove_outlier(df: pd.DataFrame):
     df['내부CO2'] = np.vectorize(lambda x: x*100 if x < 10 else x)(df['내부CO2'])
+    df['내부온도'] = np.vectorize(lambda x: x*10 if x < 10 else x)(df['내부온도'])
+    df['내부습도'] = np.vectorize(lambda x: x*10 if x < 10 else x)(df['내부습도'])
+    interpolate(df, len(df), ('내부CO2','내부온도','내부습도'))
+
+
+
+def interpolate(seg, length, cols):
+    for col in cols:
+        count = 0
+        result = 0
+
+        for i in range(length):
+            if pd.isna(seg[col][i]):
+                continue
+            if seg[col][i] != 0:
+                count += 1
+                result += seg[col][i]
+
+            output = result/count
+
+        for i in range(length):
+            if pd.isna(seg[col][i]) or seg[col][i] == 0:
+                seg[col][i] = output
