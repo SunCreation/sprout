@@ -31,12 +31,15 @@ def preprocess_remove_str(df:pd.Series) -> pd.Series:
 
 
 # 입력 시계열화
-input_ts = []
-for i in outputs['Sample_no']:
-    sample = input_sc[inputs['Sample_no'] == i]
-    if len(sample < 7):
-        sample = np.append(np.zeros((7-len(sample), sample.shape[-1])), sample,
-                           axis=0)
-    sample = np.expand_dims(sample, axis=0)
-    input_ts.append(sample)
-input_ts = np.concatenate(input_ts, axis=0)
+def slice_sample(inputs, outputs, input_sc):
+    input_ts = []
+    for i in outputs['Sample_no']:
+        sample = input_sc[inputs['Sample_no'] == i]
+        if len(sample < 7):
+            sample = np.append(np.zeros((7-len(sample), sample.shape[-1])), sample,
+                            axis=0)
+        sample = np.expand_dims(sample, axis=0)
+        input_ts.append(sample)
+    input_ts = np.concatenate(input_ts, axis=0)
+
+    return input_ts
