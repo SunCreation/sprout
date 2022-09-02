@@ -37,6 +37,7 @@ data_path = args.data_path
 inputs = pd.read_csv(f'{data_path}/train_input.csv')
 outputs = pd.read_csv(f'{data_path}/train_output.csv')
 
+inputs_ = inputs
 
 # print(inputs[incloud_null_col(inputs)[0]])
 
@@ -47,11 +48,9 @@ del inputs['재배형태']
 # del inputs['일']
 # del inputs['Sample_no']
 
-input_scaler = MinMaxScaler()
-output_scaler = MinMaxScaler()
 
 inputs = inputs.apply(preprocess_remove_str)
-print(inputs)
+# print(inputs)
 # inputs = inputs.iloc[:,3:].to_numpy()
 # shape = inputs.shape
 # print(inputs)
@@ -70,28 +69,20 @@ print(inputs)
 
 
 # scaling
+input_scaler = MinMaxScaler()
+output_scaler = MinMaxScaler()
+
 input_sc = input_scaler.fit_transform(inputs.iloc[:,3:].to_numpy())
 output_sc = output_scaler.fit_transform(outputs.iloc[:,3:].to_numpy())
 
 print(input_sc)
 
+# sample 별로 데이터 종합
 input_ts = slice_sample(inputs, outputs, input_sc)
 
 print(input_ts.shape)
 
 input_ts = np.where(tf.math.is_nan(input_ts), 0, input_ts)
-
-# # 입력 시계열화
-# input_ts = []
-# for i in outputs['Sample_no']:
-#     sample = input_sc[inputs['Sample_no'] == i]
-#     if len(sample < 7):
-#         sample = np.append(np.zeros((7-len(sample), sample.shape[-1])), sample,
-#                            axis=0)
-#     sample = np.expand_dims(sample, axis=0)
-#     input_ts.append(sample)
-# input_ts = np.concatenate(input_ts, axis=0)
-
 
 # 셋 분리
 train_x, val_x, train_y, val_y = train_test_split(input_ts, output_sc, test_size=0.2,
@@ -113,7 +104,7 @@ model.compile(loss='mse', optimizer=Adam(lr=0.001), metrics=['mse'])
 
 
 # 학습
-hist = model.fit(train_x, train_y, batch_size=32, epochs=100, validation_data=(val_x, val_y), callbacks=[checkpointer])
+hist = model.fit(train_x, train_y, batch_size=128, epochs=200, validation_data=(val_x, val_y), callbacks=[checkpointer])
 
 
 # loss 히스토리 확인
@@ -132,22 +123,22 @@ model.load_weights('baseline.h5')
 
 
 # 테스트셋 전처리 및 추론
-test_inputs = pd.read_csv('./test_input.csv')
-output_sample = pd.read_csv('./answer_sample.csv')
+test_inputs = pd.read_csv(f'{data_path}/test_input.csv')
+output_sample = pd.read_csv(f'{data_path}/answer_sample.csv')
 
-test_inputs = test_inputs[inputs.columns]
-test_inputs['주차'] = [int(i.replace('주차', "")) for i in test_inputs['주차']]
+test_inputs = test_inputs[inputs_.columns]
+
+test_inputs = pd.concat([test_inputs,pd.get_dummies(test_inputs['시설ID']),pd.get_dummies(test_inputs['재배형태'])],axis=1)
+
+del test_inputs['재배형태']
+
+test_inputs = test_inputs.apply(preprocess_remove_str)
+
 test_input_sc = input_scaler.transform(test_inputs.iloc[:,3:].to_numpy())
 
-test_input_ts = []
-for i in output_sample['Sample_no']:
-    sample = test_input_sc[test_inputs['Sample_no'] == i]
-    if len(sample < 7):
-        sample = np.append(np.zeros((7-len(sample), sample.shape[-1])), sample,
-                           axis=0)
-    sample = np.expand_dims(sample, axis=0)
-    test_input_ts.append(sample)
-test_input_ts = np.concatenate(test_input_ts, axis=0)
+test_input_ts = slice_sample(test_inputs, output_sample, test_input_sc)
+
+test_input_ts = np.where(tf.math.is_nan(test_input_ts), 0, test_input_ts)
 
 prediction = model.predict(test_input_ts)
 
