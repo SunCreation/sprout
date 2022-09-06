@@ -2,7 +2,7 @@ import numpy as np
 import torch as th
 import pandas as pd
 import tensorflow as tf
-from tensorflow.keras.layers import Input, LSTM, Dense
+from tensorflow.keras.layers import Input, LSTM, Dense, GRU
 from tensorflow.keras import Model
 from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras.optimizers import Adam
@@ -43,9 +43,13 @@ inputs_ = inputs
 # print(inputs[incloud_null_col(inputs)[0]])
 remove_outlier(inputs)
 
-inputs = pd.concat([inputs,pd.get_dummies(inputs['시설ID']),pd.get_dummies(inputs['재배형태'])],axis=1)
+# inputs = pd.concat([inputs,pd.get_dummies(inputs['시설ID']),pd.get_dummies(inputs['재배형태'])],axis=1)
 
 del inputs['재배형태']
+del inputs['외부온도']
+del inputs['외부풍향']
+del inputs['외부풍속']
+
 # del inputs['일']
 # del inputs['Sample_no']
 
@@ -61,13 +65,14 @@ inputs = inputs.apply(preprocess_remove_str)
 # print(inputs.shape)
 # print(inputs)
 
-
+print(inputs.iloc[:,3:])
 # model = Sprout_Dense(30,3,inputs=inputs)
 # print(model)
 
 # # 주차 정보 수치 변환
 # inputs['주차'] = [int(i.replace('주차', "")) for i in inputs['주차']]
 
+remove_outlier(inputs)
 
 # scaling
 input_scaler = MinMaxScaler()
@@ -82,7 +87,6 @@ print(input_sc)
 input_ts = slice_sample(inputs, outputs, input_sc)
 
 print(input_ts.shape)
-
 input_ts = np.where(tf.math.is_nan(input_ts), 0, input_ts)
 
 # 셋 분리
@@ -92,10 +96,12 @@ train_x, val_x, train_y, val_y = train_test_split(input_ts, output_sc, test_size
 
 # 모델 정의
 def create_model():
-    x = Input(shape=[7, 54])
-    l1 = LSTM(256)(x)
-    out = Dense(3, activation='tanh')(l1)
-    return Model(inputs=x, outputs=out)
+    inputs_ = Input(shape=[7, 13])
+    x = inputs_
+    x = LSTM(512, return_sequences=True)(x)
+    l1 = LSTM(512)(x)
+    out = Dense(3, activation='relu')(l1+x[:,-1])
+    return Model(inputs=inputs_, outputs=out)
 
 model = create_model()
 model.summary()
@@ -105,7 +111,7 @@ model.compile(loss='mse', optimizer=Adam(lr=0.001), metrics=['mse'])
 
 
 # 학습
-hist = model.fit(train_x, train_y, batch_size=128, epochs=2, validation_data=(val_x, val_y), callbacks=[checkpointer])
+hist = model.fit(train_x, train_y, batch_size=128, epochs=300, validation_data=(val_x, val_y), callbacks=[checkpointer])
 
 
 # loss 히스토리 확인
@@ -131,9 +137,9 @@ remove_outlier(test_inputs)
 
 test_inputs = test_inputs[inputs_.columns]
 
-test_inputs = pd.concat([test_inputs,pd.get_dummies(test_inputs['시설ID']),pd.get_dummies(test_inputs['재배형태'])],axis=1)
+# test_inputs = pd.concat([test_inputs,pd.get_dummies(test_inputs['시설ID']),pd.get_dummies(test_inputs['재배형태'])],axis=1)
 
-del test_inputs['재배형태']
+# del test_inputs['재배형태']
 
 test_inputs = test_inputs.apply(preprocess_remove_str)
 

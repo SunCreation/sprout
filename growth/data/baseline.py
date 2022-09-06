@@ -27,7 +27,7 @@ inputs['주차'] = [int(i.replace('주차', "")) for i in inputs['주차']]
 input_scaler = MinMaxScaler()
 output_scaler = MinMaxScaler()
 
-
+print(inputs)
 # scaling
 input_sc = input_scaler.fit_transform(inputs.iloc[:,3:].to_numpy())
 output_sc = output_scaler.fit_transform(outputs.iloc[:,3:].to_numpy())
