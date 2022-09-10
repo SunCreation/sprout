@@ -1,1 +1,14 @@
-/home/hchang/.vscode/tasks.json
+{
+    "version":"2.0.0",
+    "tasks": [
+        {
+            "label": "deep",
+            "group": "test",
+            "command": "bash",
+            "args": [
+                "-c", "cd ${fileDirname} && python3 ${fileDirname}/${fileBasename}"
+                // "-c", "tmux new -n script -d '/bin/bash' && tmux send-keys -t $(tmux ls|cut -d : -f 1|tail -n 1) 'cd ${fileDirname} && python3 ${fileDirname}/${fileBasename}' C-m && tmux attach -t $(tmux ls|cut -d : -f 1|tail -n 1)"
+            ]
+        }
+    ]
+}
