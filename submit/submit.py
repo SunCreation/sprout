@@ -37,7 +37,7 @@ _, email, passwd= driver.find_elements_by_css_selector('.ng-untouched.ng-pristin
 
 # In[11]:
 
-with open('private') as f:
+with open('submit/private') as f:
     email.send_keys(f.readline().strip())
     passwd.send_keys(f.readline().strip())
 
@@ -102,6 +102,11 @@ dropzone.drop_files(submit_file)
 
 
 # In[24]:
+sleep(0.2)
+
+driver.find_element_by_css_selector('input.name').clear()
+driver.find_element_by_css_selector('input.name').send_keys(submit_file.split('/')[-1])
+
 sleep(0.2)
 
 submit = [i for i in driver.find_elements_by_css_selector('.btn') if i.text=='업로드' ][0]
