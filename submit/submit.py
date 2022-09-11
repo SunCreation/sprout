@@ -125,5 +125,6 @@ sleep(0.2)
 check=driver.find_element_by_css_selector('.btn_b_r35.ng-star-inserted')
 check.click()
 
+driver.close()
 
 os.system(f'mv {submit_file} {args.post_dir}')
