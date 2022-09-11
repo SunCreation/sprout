@@ -97,8 +97,8 @@ dropzone
 # In[23]:
 
 submit_file = args.submit_file
-
-dropzone.drop_files(submit_file)
+print(submit_file)
+dropzone.drop_files(os.path.abspath(submit_file))
 
 
 # In[24]:
@@ -118,13 +118,13 @@ submit
 
 submit.click()
 
+os.system(f'mv {submit_file} {args.post_dir}')
 
 # In[27]:
-sleep(0.2)
+sleep(1.5)
 
 check=driver.find_element_by_css_selector('.btn_b_r35.ng-star-inserted')
 check.click()
 
 driver.close()
 
-os.system(f'mv {submit_file} {args.post_dir}')

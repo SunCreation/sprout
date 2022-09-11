@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import argparse  as ap
 from utils import (
     incloud_null_col,
-    predict_columns,
+    predict_columns,  
     preprocess_remove_str,
     slice_sample,
     remove_outlier,
@@ -130,7 +130,7 @@ def create_model(num, input_shape):
     l1 = LSTM(num)(x + resi)
     out = Dense(3, activation='tanh')(l1)
     return Model(inputs=input_, outputs=out)
-EPOCHS = 2000
+EPOCHS = 1000
 BATCH_SIZE = 128
 learning_rate = CosineSchedule(train_steps=EPOCHS*input_ts.shape[0]//BATCH_SIZE,offset=3e-4,decay=1e-4)
 
@@ -209,6 +209,6 @@ output_sample[['생장길이', '줄기직경', '개화군']] = prediction
 postprocess(output_sample, ['생장길이', '줄기직경', '개화군'])
 
 # 제출할 추론 결과 저장
-output_sample.to_csv('prediction.csv', index=False)
+output_sample.to_csv('../pre/val0001_1000epochs_real.csv', index=False)
 
 
