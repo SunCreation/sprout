@@ -92,7 +92,7 @@ print(input_ts.shape)
 input_ts = np.where(tf.math.is_nan(input_ts), 0, input_ts)
 
 # 셋 분리
-train_x, val_x, train_y, val_y = train_test_split(input_ts, output_sc, test_size=0.01,
+train_x, val_x, train_y, val_y = train_test_split(input_ts, output_sc, test_size=0.001,
                                                   shuffle=True, random_state=0)
 
 
@@ -132,7 +132,7 @@ def create_model(num, input_shape):
     return Model(inputs=input_, outputs=out)
 EPOCHS = 2000
 BATCH_SIZE = 128
-learning_rate = CosineSchedule(train_steps=EPOCHS*input_ts.shape[0]//BATCH_SIZE)
+learning_rate = CosineSchedule(train_steps=EPOCHS*input_ts.shape[0]//BATCH_SIZE,offset=3e-4,decay=1e-4)
 
 with strategy.scope():
     model = create_model(128, input_ts.shape[1:])
