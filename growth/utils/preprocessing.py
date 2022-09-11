@@ -45,11 +45,16 @@ def slice_sample(inputs, outputs, input_sc):
     return input_ts
 
 
-def remove_outlier(df: pd.DataFrame):
-    df['내부CO2'] = np.vectorize(lambda x: x*100 if x < 10 else x)(df['내부CO2'])
-    df['내부온도'] = np.vectorize(lambda x: x*10 if x < 10 else x)(df['내부온도'])
-    df['내부습도'] = np.vectorize(lambda x: x*10 if x < 10 else x)(df['내부습도'])
-    interpolate(df, len(df), ('내부CO2','내부온도','내부습도'))
+def remove_outlier(df: pd.DataFrame, out_df:pd.DataFrame = None):
+    # df['내부CO2'] = np.vectorize(lambda x: x*100 if x < 10 else x)(df['내부CO2'])
+    df['내부온도'] = np.vectorize(lambda x: x*10 if x < 3 else x)(df['내부온도'])
+    df['내부습도'] = np.vectorize(lambda x: x/10 if x > 100 else x)(df['내부습도'])
+    # interpolate(df, len(df), ('내부CO2','내부온도','내부습도'))
+    if out_df is not None:
+        ...
+        # out_df[ '생장길이'] = np.vectorize(lambda x: x/10 if x > 1800 else x)(out_df['생장길이'])
+        # out_df['개화군'] = np.vectorize(lambda x: x/10 if x > 40 else x)(out_df['개화군'])
+
 
 
 
@@ -70,3 +75,12 @@ def interpolate(seg, length, cols):
         for i in range(length):
             if pd.isna(seg[col][i]) or seg[col][i] == 0:
                 seg[col][i] = output
+
+
+def dummy_onehot_concat(df: pd.DataFrame, cols: list):
+    concat_target = [df]
+    for col in cols:
+        concat_target.append(pd.get_dummies(df[col]))
+    
+    df = pd.concat(concat_target,axis=1)
+    return df
