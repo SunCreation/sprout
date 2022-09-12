@@ -21,3 +21,9 @@ class CosineSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
         # self.lr = self.lr * (1 - self.decay * (1-state.eval())) + state.eval() * 1e-7
         # lr =  tf.cast(self.lr,tf.float32) + self.offset
         return self.offset + self.decay * tf.math.cos(3.14*tf.cast(step_num, tf.float32)/self.train_steps)
+
+    def get_config(self):
+        config = {
+        'train_steps': self.train_steps,
+        }
+        return config

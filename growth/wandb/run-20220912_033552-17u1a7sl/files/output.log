@@ -1,0 +1,45 @@
+         주차       내부CO2       내부습도       내부온도   지온  강우감지  ...  급액횟수  급액EC(dS/m)  급액pH  급액량(회당)  수경  토경
+0      30.0  517.041667  84.985417  20.610833  0.0   NaN  ...    14        2.68  4.42       88   0   0
+1      30.0  514.416667  88.291250  20.695000  0.0   NaN  ...    14        2.78  5.63       97   0   0
+2      30.0  471.875000  83.514583  20.402500  0.0   NaN  ...    14        2.69  4.25      101   0   0
+3      30.0  469.250000  80.916250  20.139167  0.0   NaN  ...    14        2.70  4.25       99   0   0
+4      30.0  465.750000  82.026250  17.653333  0.0   NaN  ...    13        2.66  4.21       94   0   0
+...     ...         ...        ...        ...  ...   ...  ...   ...         ...   ...      ...  ..  ..
+10107   7.0  334.684002  65.565417  21.985833  NaN   NaN  ...    26        2.06  5.80       81   0   0
+10108   7.0  333.726601  61.144167  22.530833  NaN   NaN  ...    28        2.43  4.42       32   0   0
+10109   7.0  344.862883  72.867917  20.397917  NaN   NaN  ...    21        2.71  5.88       27   0   0
+10110   7.0  372.708516  66.672917  24.401667  NaN   NaN  ...    18        2.50  5.39       82   0   0
+10111   7.0  372.612192  59.257083  28.352500  NaN   NaN  ...    16        2.50  5.39       82   0   0
+[10112 rows x 17 columns]
+[[0.39726027 0.4144426  0.84470605 ... 0.53508772 0.         0.        ]
+ [0.39726027 0.41233849 0.87889787 ... 0.61403509 0.         0.        ]
+ [0.39726027 0.37823857 0.82949341 ... 0.64912281 0.         0.        ]
+ ...
+ [0.08219178 0.27643008 0.71937628 ... 0.         0.         0.        ]
+ [0.08219178 0.29875017 0.65530217 ... 0.48245614 0.         0.        ]
+ [0.08219178 0.29867296 0.57860114 ... 0.48245614 0.         0.        ]]
+(1518, 7, 17)
+/mnt/disks/hc/sprout/growth/utils/preprocessing.py:77: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  seg[col][i] = output
+Traceback (most recent call last):
+  File "main_xla.py", line 243, in <module>
+    train()
+  File "main_xla.py", line 161, in train
+    model.compile(loss='mse', optimizer=Adam(learning_rate=learning_rate,metrics=config.metrics))
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/optimizers/optimizer_v2/adam.py", line 110, in __init__
+    super(Adam, self).__init__(name, **kwargs)
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/optimizers/optimizer_v2/optimizer_v2.py", line 351, in __init__
+    raise TypeError("Unexpected keyword argument "
+TypeError: Unexpected keyword argument passed to optimizer: metrics. Allowed kwargs are {'clipnorm', 'lr', 'global_clipnorm', 'clipvalue', 'decay'}.
+Traceback (most recent call last):
+  File "main_xla.py", line 243, in <module>
+    train()
+  File "main_xla.py", line 161, in train
+    model.compile(loss='mse', optimizer=Adam(learning_rate=learning_rate,metrics=config.metrics))
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/optimizers/optimizer_v2/adam.py", line 110, in __init__
+    super(Adam, self).__init__(name, **kwargs)
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/optimizers/optimizer_v2/optimizer_v2.py", line 351, in __init__
+    raise TypeError("Unexpected keyword argument "
+TypeError: Unexpected keyword argument passed to optimizer: metrics. Allowed kwargs are {'clipnorm', 'lr', 'global_clipnorm', 'clipvalue', 'decay'}.

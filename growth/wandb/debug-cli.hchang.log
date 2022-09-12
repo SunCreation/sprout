@@ -1,0 +1,81 @@
+2022-09-12 04:53:51 INFO Running runs: []
+2022-09-12 04:53:51 INFO Agent received command: run
+2022-09-12 04:53:51 INFO Agent starting run with config:
+	batchsize: 98
+	epochs: 3886
+	hiddensize: 185
+2022-09-12 04:53:51 INFO About to run command: /usr/bin/env python train.py --batchsize=98 --epochs=3886 --hiddensize=185
+2022-09-12 04:53:56 INFO Running runs: ['jj92kkt7']
+2022-09-12 04:53:56 INFO Cleaning up finished run: jj92kkt7
+2022-09-12 04:53:57 INFO Agent received command: run
+2022-09-12 04:53:57 INFO Agent starting run with config:
+	batchsize: 50
+	epochs: 2043
+	hiddensize: 154
+2022-09-12 04:53:57 INFO About to run command: /usr/bin/env python train.py --batchsize=50 --epochs=2043 --hiddensize=154
+2022-09-12 04:54:02 INFO Running runs: ['wlg2ug5k']
+2022-09-12 04:54:02 INFO Cleaning up finished run: wlg2ug5k
+2022-09-12 04:54:02 INFO Agent received command: run
+2022-09-12 04:54:02 INFO Agent starting run with config:
+	batchsize: 114
+	epochs: 2217
+	hiddensize: 158
+2022-09-12 04:54:02 INFO About to run command: /usr/bin/env python train.py --batchsize=114 --epochs=2217 --hiddensize=158
+2022-09-12 04:58:04 INFO Running runs: []
+2022-09-12 04:58:05 INFO Agent received command: run
+2022-09-12 04:58:05 INFO Agent starting run with config:
+	batchsize: 64
+	epochs: 1000
+	hiddensize: 128
+	metrics: ['mae']
+2022-09-12 04:58:05 INFO About to run command: /usr/bin/env python main_xla.py --batchsize=64 --epochs=1000 --hiddensize=128 --metrics=['mae']
+2022-09-12 04:58:10 INFO Running runs: ['wtlrohho']
+2022-09-12 04:58:10 INFO Cleaning up finished run: wtlrohho
+2022-09-12 04:58:10 INFO Agent received command: run
+2022-09-12 04:58:10 INFO Agent starting run with config:
+	batchsize: 64
+	epochs: 1000
+	hiddensize: 256
+	metrics: ['mae']
+2022-09-12 04:58:10 INFO About to run command: /usr/bin/env python main_xla.py --batchsize=64 --epochs=1000 --hiddensize=256 --metrics=['mae']
+2022-09-12 04:58:15 INFO Running runs: ['ktg8p4zl']
+2022-09-12 04:58:15 INFO Cleaning up finished run: ktg8p4zl
+2022-09-12 04:58:15 INFO Agent received command: run
+2022-09-12 04:58:15 INFO Agent starting run with config:
+	batchsize: 64
+	epochs: 1000
+	hiddensize: 356
+	metrics: ['mae']
+2022-09-12 04:58:15 INFO About to run command: /usr/bin/env python main_xla.py --batchsize=64 --epochs=1000 --hiddensize=356 --metrics=['mae']
+2022-09-12 04:58:20 INFO Running runs: ['zcnlbdjc']
+2022-09-12 04:58:20 ERROR Detected 3 failed runs in the first 60 seconds, shutting down.
+2022-09-12 04:58:20 INFO To disable this check set WANDB_AGENT_DISABLE_FLAPPING=true
+2022-09-12 04:58:45 INFO Running runs: []
+2022-09-12 04:58:45 INFO Agent received command: run
+2022-09-12 04:58:45 INFO Agent starting run with config:
+	batchsize: 64
+	epochs: 1000
+	hiddensize: 512
+	metrics: ['mae']
+2022-09-12 04:58:45 INFO About to run command: /usr/bin/env python main_xla.py --batchsize=64 --epochs=1000 --hiddensize=512 --metrics=['mae']
+2022-09-12 04:58:50 INFO Running runs: ['8daic0on']
+2022-09-12 04:58:50 INFO Cleaning up finished run: 8daic0on
+2022-09-12 04:58:51 INFO Agent received command: run
+2022-09-12 04:58:51 INFO Agent starting run with config:
+	batchsize: 64
+	epochs: 2000
+	hiddensize: 128
+	metrics: ['mae']
+2022-09-12 04:58:51 INFO About to run command: /usr/bin/env python main_xla.py --batchsize=64 --epochs=2000 --hiddensize=128 --metrics=['mae']
+2022-09-12 04:58:56 INFO Running runs: ['m4kscrsk']
+2022-09-12 04:58:56 INFO Cleaning up finished run: m4kscrsk
+2022-09-12 04:58:56 INFO Agent received command: run
+2022-09-12 04:58:56 INFO Agent starting run with config:
+	batchsize: 64
+	epochs: 2000
+	hiddensize: 256
+	metrics: ['mae']
+2022-09-12 04:58:56 INFO About to run command: /usr/bin/env python main_xla.py --batchsize=64 --epochs=2000 --hiddensize=256 --metrics=['mae']
+2022-09-12 04:59:01 INFO Running runs: ['ykseuqiv']
+2022-09-12 04:59:01 ERROR Detected 3 failed runs in the first 60 seconds, shutting down.
+2022-09-12 04:59:01 INFO To disable this check set WANDB_AGENT_DISABLE_FLAPPING=true

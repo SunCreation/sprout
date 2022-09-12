@@ -1,0 +1,8 @@
+wandb_version: 1
+
+batchsize:
+  value: 50
+epochs:
+  value: 2043
+hiddensize:
+  value: 154

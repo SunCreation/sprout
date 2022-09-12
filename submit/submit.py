@@ -118,7 +118,7 @@ submit
 
 submit.click()
 
-os.system(f'mv {submit_file} {args.post_dir}')
+os.system(f'mv "{submit_file}" "{args.post_dir}"')
 
 # In[27]:
 sleep(1.5)

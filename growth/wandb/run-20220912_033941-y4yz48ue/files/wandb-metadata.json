@@ -1,0 +1,22 @@
+{
+    "os": "Linux-5.13.0-1033-gcp-x86_64-with-glibc2.29",
+    "python": "3.8.10",
+    "heartbeatAt": "2022-09-12T03:39:42.194524",
+    "startedAt": "2022-09-12T03:39:41.759719",
+    "docker": null,
+    "cpu_count": 96,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "main_xla.py",
+    "codePath": "growth/main_xla.py",
+    "git": {
+        "remote": "git@github.com:SunCreation/sprout.git",
+        "commit": "e5b0f9c8def7a5e62b8f11123a6429ff789b6ec9"
+    },
+    "email": "cake0103@nate.com",
+    "root": "/mnt/disks/hc/sprout",
+    "host": "t1v-n-ec027f54-w-0",
+    "username": "hchang",
+    "executable": "/usr/bin/python3"
+}

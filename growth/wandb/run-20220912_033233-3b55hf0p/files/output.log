@@ -1,0 +1,265 @@
+         주차       내부CO2       내부습도       내부온도   지온  강우감지  ...  급액횟수  급액EC(dS/m)  급액pH  급액량(회당)  수경  토경
+0      30.0  517.041667  84.985417  20.610833  0.0   NaN  ...    14        2.68  4.42       88   0   0
+1      30.0  514.416667  88.291250  20.695000  0.0   NaN  ...    14        2.78  5.63       97   0   0
+2      30.0  471.875000  83.514583  20.402500  0.0   NaN  ...    14        2.69  4.25      101   0   0
+3      30.0  469.250000  80.916250  20.139167  0.0   NaN  ...    14        2.70  4.25       99   0   0
+4      30.0  465.750000  82.026250  17.653333  0.0   NaN  ...    13        2.66  4.21       94   0   0
+...     ...         ...        ...        ...  ...   ...  ...   ...         ...   ...      ...  ..  ..
+10107   7.0  334.684002  65.565417  21.985833  NaN   NaN  ...    26        2.06  5.80       81   0   0
+10108   7.0  333.726601  61.144167  22.530833  NaN   NaN  ...    28        2.43  4.42       32   0   0
+10109   7.0  344.862883  72.867917  20.397917  NaN   NaN  ...    21        2.71  5.88       27   0   0
+10110   7.0  372.708516  66.672917  24.401667  NaN   NaN  ...    18        2.50  5.39       82   0   0
+10111   7.0  372.612192  59.257083  28.352500  NaN   NaN  ...    16        2.50  5.39       82   0   0
+[10112 rows x 17 columns]
+[[0.39726027 0.4144426  0.84470605 ... 0.53508772 0.         0.        ]
+ [0.39726027 0.41233849 0.87889787 ... 0.61403509 0.         0.        ]
+ [0.39726027 0.37823857 0.82949341 ... 0.64912281 0.         0.        ]
+ ...
+ [0.08219178 0.27643008 0.71937628 ... 0.         0.         0.        ]
+ [0.08219178 0.29875017 0.65530217 ... 0.48245614 0.         0.        ]
+ [0.08219178 0.29867296 0.57860114 ... 0.48245614 0.         0.        ]]
+(1518, 7, 17)
+/mnt/disks/hc/sprout/growth/utils/preprocessing.py:77: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  seg[col][i] = output
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to
+==================================================================================================
+ input_1 (InputLayer)           [(None, 7, 17)]      0           []
+ dense (Dense)                  (None, 7, 128)       2304        ['input_1[0][0]']
+ lstm (LSTM)                    (None, 7, 128)       131584      ['dense[0][0]']
+ lstm_1 (LSTM)                  (None, 7, 128)       131584      ['lstm[0][0]']
+ tf.__operators__.add (TFOpLamb  (None, 7, 128)      0           ['lstm_1[0][0]',
+ da)                                                              'lstm[0][0]']
+ dense_1 (Dense)                (None, 7, 128)       16512       ['tf.__operators__.add[0][0]']
+ lstm_2 (LSTM)                  (None, 7, 128)       131584      ['dense_1[0][0]']
+ tf.__operators__.add_1 (TFOpLa  (None, 7, 128)      0           ['lstm_2[0][0]',
+ mbda)                                                            'dense_1[0][0]']
+ lstm_3 (LSTM)                  (None, 7, 128)       131584      ['tf.__operators__.add_1[0][0]']
+ tf.__operators__.add_2 (TFOpLa  (None, 7, 128)      0           ['lstm_3[0][0]',
+ mbda)                                                            'tf.__operators__.add_1[0][0]']
+ lstm_4 (LSTM)                  (None, 7, 128)       131584      ['tf.__operators__.add_2[0][0]']
+ tf.__operators__.add_3 (TFOpLa  (None, 7, 128)      0           ['lstm_4[0][0]',
+ mbda)                                                            'tf.__operators__.add_2[0][0]']
+ dense_2 (Dense)                (None, 7, 128)       16512       ['tf.__operators__.add_3[0][0]']
+ lstm_5 (LSTM)                  (None, 7, 128)       131584      ['dense_2[0][0]']
+ tf.__operators__.add_4 (TFOpLa  (None, 7, 128)      0           ['lstm_5[0][0]',
+ mbda)                                                            'dense_2[0][0]']
+ lstm_6 (LSTM)                  (None, 7, 128)       131584      ['tf.__operators__.add_4[0][0]']
+ tf.__operators__.add_5 (TFOpLa  (None, 7, 128)      0           ['lstm_6[0][0]',
+ mbda)                                                            'tf.__operators__.add_4[0][0]']
+ lstm_7 (LSTM)                  (None, 128)          131584      ['tf.__operators__.add_5[0][0]']
+ dense_3 (Dense)                (None, 3)            387         ['lstm_7[0][0]']
+==================================================================================================
+Total params: 1,088,387
+Trainable params: 1,088,387
+Non-trainable params: 0
+__________________________________________________________________________________________________
+[34m[1mwandb[39m[22m: [33mWARNING[39m The data_type argument of wandb.keras.WandbCallback is deprecated and will be removed in a future release. Please use input_type instead.
+[34m[1mwandb[39m[22m: [33mWARNING[39m Setting input_type = data_type.
+Epoch 1/3000
+[34m[1mwandb[39m[22m: [33mWARNING[39m Unable to compute FLOPs for this model.
+
+24/24 [==============================] - 25s 386ms/step - loss: 0.0203 - val_loss: 0.0381
+Epoch 2/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0151 - val_loss: 0.0365
+Epoch 3/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0140 - val_loss: 0.0441
+Epoch 4/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0131 - val_loss: 0.0486
+Epoch 5/3000
+24/24 [==============================] - 1s 25ms/step - loss: 0.0133 - val_loss: 0.0313
+Epoch 6/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0128 - val_loss: 0.0420
+Epoch 7/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0121 - val_loss: 0.0390
+Epoch 8/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0118 - val_loss: 0.0342
+Epoch 9/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0113 - val_loss: 0.0255
+Epoch 10/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0109 - val_loss: 0.0301
+Epoch 11/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0106 - val_loss: 0.0348
+Epoch 12/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0099 - val_loss: 0.0342
+Epoch 13/3000
+Epoch 14/3000========================] - 1s 25ms/step - loss: 0.0090 - val_loss: 0.0206
+Epoch 14/3000========================] - 1s 25ms/step - loss: 0.0090 - val_loss: 0.0206
+24/24 [==============================] - 1s 39ms/step - loss: 0.0085 - val_loss: 0.0197
+Epoch 15/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0084 - val_loss: 0.0227
+Epoch 16/3000
+24/24 [==============================] - 1s 25ms/step - loss: 0.0065 - val_loss: 0.0080
+Epoch 17/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0070 - val_loss: 0.0130
+Epoch 18/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0080 - val_loss: 0.0087
+Epoch 19/3000
+24/24 [==============================] - 1s 25ms/step - loss: 0.0065 - val_loss: 0.0080
+Epoch 20/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0057 - val_loss: 0.0017
+Epoch 21/3000
+24/24 [==============================] - 1s 25ms/step - loss: 0.0060 - val_loss: 0.0029
+Epoch 22/3000
+24/24 [==============================] - 1s 24ms/step - loss: 0.0053 - val_loss: 0.0016
+Epoch 23/3000
+21/24 [=========================>....] - ETA: 0s - loss: 0.0048
+24/24 [==============================] - 1s 25ms/step - loss: 0.0049 - val_loss: 2.9129e-04
+Epoch 25/3000
+24/24 [==============================] - 1s 25ms/step - loss: 0.0044 - val_loss: 0.0026
+Epoch 26/3000
+21/24 [=========================>....] - ETA: 0s - loss: 0.0045
+24/24 [==============================] - 1s 26ms/step - loss: 0.0045 - val_loss: 0.0012e-04
+Epoch 29/3000
+24/24 [==============================] - 1s 25ms/step - loss: 0.0040 - val_loss: 1.9456e-04
+Epoch 30/3000
+ 6/24 [======>.......................] - ETA: 0s - loss: 0.0039
+24/24 [==============================] - 1s 25ms/step - loss: 0.0037 - val_loss: 5.9269e-04
+Epoch 33/3000
+21/24 [=========================>....] - ETA: 0s - loss: 0.0045
+21/24 [=========================>....] - ETA: 0s - loss: 0.0030.0037 - val_loss: 5.9269e-04
+ 6/24 [======>.......................] - ETA: 0s - loss: 0.0029.0030 - val_loss: 2.4889e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0025 - val_loss: 3.4629e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0026 - val_loss: 0.0015e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0022 - val_loss: 0.0023e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0020 - val_loss: 8.5839e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0021 - val_loss: 0.0018e-04
+21/24 [=========================>....] - ETA: 0s - loss: 0.0020    1 - val_loss: 0.0018e-04
+24/24 [==============================] - 1s 25ms/step - loss: 0.0018 - val_loss: 8.1943e-04
+24/24 [==============================] - 1s 25ms/step - loss: 0.0019 - val_loss: 0.0020e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0017 - val_loss: 0.0019e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0016 - val_loss: 0.0013e-04
+16/24 [===================>..........] - ETA: 0s - loss: 0.0018.0016 - val_loss: 0.0013e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0017 - val_loss: 0.0013e-04
+24/24 [==============================] - 1s 25ms/step - loss: 0.0016 - val_loss: 0.0011e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0015 - val_loss: 5.2631e-04
+24/24 [==============================] - 1s 25ms/step - loss: 0.0015 - val_loss: 0.0020e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0015 - val_loss: 9.6399e-04
+21/24 [=========================>....] - ETA: 0s - loss: 0.0015    5 - val_loss: 9.6399e-04
+24/24 [==============================] - 1s 25ms/step - loss: 0.0015 - val_loss: 0.0017e-04
+24/24 [==============================] - 1s 25ms/step - loss: 0.0016 - val_loss: 4.4320e-04
+24/24 [==============================] - 1s 26ms/step - loss: 0.0014 - val_loss: 9.2855e-04
+24/24 [==============================] - 1s 25ms/step - loss: 0.0015 - val_loss: 7.2171e-04
+24/24 [==============================] - 1s 25ms/step - loss: 0.0015 - val_loss: 4.1178e-04
+21/24 [=========================>....] - ETA: 0s - loss: 0.0014.0015 - val_loss: 4.1178e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0013 - val_loss: 0.0012e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0015 - val_loss: 5.0823e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0013 - val_loss: 7.2075e-04
+24/24 [==============================] - 1s 26ms/step - loss: 0.0018 - val_loss: 7.7464e-04
+21/24 [=========================>....] - ETA: 0s - loss: 0.0013    8 - val_loss: 7.7464e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0013 - val_loss: 7.7114e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0013 - val_loss: 6.9503e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0013 - val_loss: 3.2298e-04
+24/24 [==============================] - 1s 25ms/step - loss: 0.0013 - val_loss: 8.4494e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0013 - val_loss: 3.9555e-04
+20/24 [========================>.....] - ETA: 0s - loss: 0.0011    3 - val_loss: 3.9555e-04
+24/24 [==============================] - 1s 26ms/step - loss: 0.0013 - val_loss: 3.1778e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0013 - val_loss: 7.6920e-04
+24/24 [==============================] - 1s 25ms/step - loss: 0.0013 - val_loss: 0.0012e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0013 - val_loss: 3.1915e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0013 - val_loss: 8.9820e-04
+21/24 [=========================>....] - ETA: 0s - loss: 0.0014    3 - val_loss: 8.9820e-04
+11/24 [============>.................] - ETA: 0s - loss: 0.0012.0013 - val_loss: 4.4082e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0012 - val_loss: 8.5568e-04
+24/24 [==============================] - 1s 46ms/step - loss: 0.0012 - val_loss: 4.4910e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0012 - val_loss: 3.8026e-04
+24/24 [==============================] - 1s 25ms/step - loss: 0.0013 - val_loss: 2.2110e-04
+21/24 [=========================>....] - ETA: 0s - loss: 0.0013.0013 - val_loss: 2.2110e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0013 - val_loss: 0.0014e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0012 - val_loss: 1.7475e-04
+24/24 [==============================] - 1s 24ms/step - loss: 0.0012 - val_loss: 1.7475e-04
+Traceback (most recent call last):
+  File "main_xla.py", line 243, in <module>
+    train()
+  File "main_xla.py", line 166, in train
+    hist = model.fit(train_x, train_y,
+  File "/home/hchang/.local/lib/python3.8/site-packages/wandb/integration/keras/keras.py", line 173, in new_v2
+    return old_v2(*args, **kwargs)
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/utils/traceback_utils.py", line 64, in error_handler
+    return fn(*args, **kwargs)
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/engine/training.py", line 1445, in fit
+    val_logs = self.evaluate(
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/utils/traceback_utils.py", line 64, in error_handler
+    return fn(*args, **kwargs)
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/engine/training.py", line 1750, in evaluate
+    for _, iterator in data_handler.enumerate_epochs():  # Single epoch.
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/engine/data_adapter.py", line 1193, in enumerate_epochs
+    data_iterator = iter(self._dataset)
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/distribute/input_lib.py", line 1228, in __iter__
+    worker_iterators = _create_iterators_per_worker(
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/distribute/input_lib.py", line 1857, in _create_iterators_per_worker
+    iterator = _SingleWorkerOwnedDatasetIterator(
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/distribute/input_lib.py", line 1761, in __init__
+    super(_SingleWorkerOwnedDatasetIterator,
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/distribute/input_lib.py", line 1585, in __init__
+    self._make_iterator()
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/distribute/input_lib.py", line 1792, in _make_iterator
+    self._create_owned_multi_device_iterator()
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/distribute/input_lib.py", line 1783, in _create_owned_multi_device_iterator
+    self._iterator = multi_device_iterator_ops.OwnedMultiDeviceIterator(
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/data/ops/multi_device_iterator_ops.py", line 497, in __init__
+    ds = _PerDeviceGenerator(
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/data/ops/multi_device_iterator_ops.py", line 98, in __init__
+    self._next_func = _remote_next_func.get_concrete_function()
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 2567, in get_concrete_function
+    graph_function = self._get_concrete_function_garbage_collected(
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 2533, in _get_concrete_function_garbage_collected
+    graph_function, _ = self._maybe_define_function(args, kwargs)
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 2711, in _maybe_define_function
+    graph_function = self._create_graph_function(args, kwargs)
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 2627, in _create_graph_function
+    func_graph_module.func_graph_from_py_func(
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/framework/func_graph.py", line 1182, in func_graph_from_py_func
+    func_graph.variables = variables
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/framework/auto_control_deps.py", line 572, in __exit__
+    self.ops_which_must_run.update(ops_which_must_run)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "main_xla.py", line 243, in <module>
+    train()
+  File "main_xla.py", line 166, in train
+    hist = model.fit(train_x, train_y,
+  File "/home/hchang/.local/lib/python3.8/site-packages/wandb/integration/keras/keras.py", line 173, in new_v2
+    return old_v2(*args, **kwargs)
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/utils/traceback_utils.py", line 64, in error_handler
+    return fn(*args, **kwargs)
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/engine/training.py", line 1445, in fit
+    val_logs = self.evaluate(
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/utils/traceback_utils.py", line 64, in error_handler
+    return fn(*args, **kwargs)
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/engine/training.py", line 1750, in evaluate
+    for _, iterator in data_handler.enumerate_epochs():  # Single epoch.
+  File "/home/hchang/.local/lib/python3.8/site-packages/keras/engine/data_adapter.py", line 1193, in enumerate_epochs
+    data_iterator = iter(self._dataset)
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/distribute/input_lib.py", line 1228, in __iter__
+    worker_iterators = _create_iterators_per_worker(
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/distribute/input_lib.py", line 1857, in _create_iterators_per_worker
+    iterator = _SingleWorkerOwnedDatasetIterator(
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/distribute/input_lib.py", line 1761, in __init__
+    super(_SingleWorkerOwnedDatasetIterator,
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/distribute/input_lib.py", line 1585, in __init__
+    self._make_iterator()
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/distribute/input_lib.py", line 1792, in _make_iterator
+    self._create_owned_multi_device_iterator()
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/distribute/input_lib.py", line 1783, in _create_owned_multi_device_iterator
+    self._iterator = multi_device_iterator_ops.OwnedMultiDeviceIterator(
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/data/ops/multi_device_iterator_ops.py", line 497, in __init__
+    ds = _PerDeviceGenerator(
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/data/ops/multi_device_iterator_ops.py", line 98, in __init__
+    self._next_func = _remote_next_func.get_concrete_function()
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 2567, in get_concrete_function
+    graph_function = self._get_concrete_function_garbage_collected(
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 2533, in _get_concrete_function_garbage_collected
+    graph_function, _ = self._maybe_define_function(args, kwargs)
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 2711, in _maybe_define_function
+    graph_function = self._create_graph_function(args, kwargs)
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 2627, in _create_graph_function
+    func_graph_module.func_graph_from_py_func(
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/framework/func_graph.py", line 1182, in func_graph_from_py_func
+    func_graph.variables = variables
+  File "/home/hchang/.local/lib/python3.8/site-packages/tensorflow/python/framework/auto_control_deps.py", line 572, in __exit__
+    self.ops_which_must_run.update(ops_which_must_run)
+KeyboardInterrupt

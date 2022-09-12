@@ -1,0 +1,11 @@
+wandb_version: 1
+
+batchsize:
+  value: 64
+epochs:
+  value: 1000
+hiddensize:
+  value: 128
+metrics:
+  value:
+  - mae

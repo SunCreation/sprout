@@ -1,0 +1,17 @@
+name: first_test
+metric: 
+  name: val_mae
+  goal: minimize
+method: grid
+parameters:
+  epochs: 
+    values: [1000,2000,3000]
+  batchsize: 
+    values: [64,128]
+  hiddensize: 
+    values: [128,256,356,512]
+  # cols: [주차, 내부CO2, 내부습도, 내부온도, 지온, 강우감지, 일사량, 지습, 급액횟수, 급액EC(dS/m), 급액pH, 급액량(회당), 재배형태] #[Sample_no, 시설ID, 일, 주차, 내부CO2, 내부습도, 내부온도, 지온, 강우감지, 일사량, 외부온도, 외부풍향, 외부풍속, 지습, 급액횟수, 급액EC(dS/m), 급액pH, 급액량(회당), 품종, 재배형태]
+  # interpolation: [지온, 지습]
+  # preprocess_target: [내부CO2, 내부습도, 내부온도]
+  metrics: 
+    value: [mae]
